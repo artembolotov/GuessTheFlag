@@ -7,18 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ABA67368295EADDA00FEB676 /* UniversalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA67367295EADDA00FEB676 /* UniversalAlert.swift */; };
+		ABA6736A2961C20600FEB676 /* UniversalBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA673692961C20600FEB676 /* UniversalBackground.swift */; };
+		ABA6736C2961C44700FEB676 /* UniversalForegroundStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA6736B2961C44700FEB676 /* UniversalForegroundStyle.swift */; };
 		ABC2A867295815EE0077EBA9 /* GuessTheFlagApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2A866295815EE0077EBA9 /* GuessTheFlagApp.swift */; };
 		ABC2A869295815EE0077EBA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2A868295815EE0077EBA9 /* ContentView.swift */; };
 		ABC2A86B295815F20077EBA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC2A86A295815F20077EBA9 /* Assets.xcassets */; };
 		ABC2A86E295815F20077EBA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC2A86D295815F20077EBA9 /* Preview Assets.xcassets */; };
+		ABC2A875295816270077EBA9 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = ABC2A874295816270077EBA9 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ABA67367295EADDA00FEB676 /* UniversalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalAlert.swift; sourceTree = "<group>"; };
+		ABA673692961C20600FEB676 /* UniversalBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalBackground.swift; sourceTree = "<group>"; };
+		ABA6736B2961C44700FEB676 /* UniversalForegroundStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalForegroundStyle.swift; sourceTree = "<group>"; };
 		ABC2A863295815EE0077EBA9 /* GuessTheFlag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessTheFlag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC2A866295815EE0077EBA9 /* GuessTheFlagApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessTheFlagApp.swift; sourceTree = "<group>"; };
 		ABC2A868295815EE0077EBA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		ABC2A86A295815F20077EBA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABC2A86D295815F20077EBA9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ABC2A874295816270077EBA9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +44,7 @@
 			isa = PBXGroup;
 			children = (
 				ABC2A865295815EE0077EBA9 /* GuessTheFlag */,
+				ABC2A874295816270077EBA9 /* .gitignore */,
 				ABC2A864295815EE0077EBA9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +64,9 @@
 				ABC2A868295815EE0077EBA9 /* ContentView.swift */,
 				ABC2A86A295815F20077EBA9 /* Assets.xcassets */,
 				ABC2A86C295815F20077EBA9 /* Preview Content */,
+				ABA67367295EADDA00FEB676 /* UniversalAlert.swift */,
+				ABA673692961C20600FEB676 /* UniversalBackground.swift */,
+				ABA6736B2961C44700FEB676 /* UniversalForegroundStyle.swift */,
 			);
 			path = GuessTheFlag;
 			sourceTree = "<group>";
@@ -126,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABC2A86E295815F20077EBA9 /* Preview Assets.xcassets in Resources */,
+				ABC2A875295816270077EBA9 /* .gitignore in Resources */,
 				ABC2A86B295815F20077EBA9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +151,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABC2A869295815EE0077EBA9 /* ContentView.swift in Sources */,
+				ABA6736A2961C20600FEB676 /* UniversalBackground.swift in Sources */,
+				ABA6736C2961C44700FEB676 /* UniversalForegroundStyle.swift in Sources */,
+				ABA67368295EADDA00FEB676 /* UniversalAlert.swift in Sources */,
 				ABC2A867295815EE0077EBA9 /* GuessTheFlagApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +291,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,6 +321,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
