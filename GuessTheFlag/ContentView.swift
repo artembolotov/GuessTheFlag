@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showingScore = false
-    @State private var scoreTitle = ""
+    @State private var showingWrongAlert = false
+    @State private var showingResultsAlert = false
+    
+    @State private var score = 0
+    @State private var scoreMessage = ""
+    @State private var currentQuestion = 1
+    
+    private let questionsCount = 8
+    
+    private var wrongDismissAction: () -> Void {
+        currentQuestion == questionsCount ? showFinalDetails : askQuestion
+    }
         
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
 
@@ -49,6 +59,8 @@ struct ContentView: View {
                                 .shadow(radius: 5)
                         }
                     }
+                    Text("Question \(currentQuestion) / \(questionsCount)")
+                        .font(.footnote)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 20)
@@ -58,7 +70,7 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
                 
-                Text("Score: ???")
+                Text("Score: \(score)")
                     .foregroundColor(.white)
                     .font(.title.bold())
                 
@@ -66,17 +78,43 @@ struct ContentView: View {
             }
             .padding()
         }
-        .universalAlert(isPresented: $showingScore, title: scoreTitle, message: "Your score is ???", dismissTitle: "Continue", dismissAction: askQuestion)
+        .universalAlert(isPresented: $showingWrongAlert, title: "Wrong", message: scoreMessage, dismissTitle: "Continue", dismissAction: wrongDismissAction)
+        
+        .universalAlert(isPresented: $showingResultsAlert, title: "Result", message: "Your score is \(score)", dismissTitle: "Reset the Game", dismissAction: resetGame)
     }
     
     func flagTapped(_ number: Int) {
-        scoreTitle = number == correctAnswer ? "Correct" : "Wrong"
-        showingScore = true
+        let isCorrect = number == correctAnswer
+        
+        score += isCorrect ? 1 : 0
+        
+        if !isCorrect {
+            scoreMessage = "That's the flag of \(countries[number])"
+            
+            showingWrongAlert = true
+        } else {
+            if currentQuestion != questionsCount {
+                askQuestion()
+            } else {
+                showFinalDetails()
+            }
+        }
     }
     
     func askQuestion() {
+        currentQuestion += 1
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+    }
+    
+    func resetGame() {
+        currentQuestion = 0
+        score = 0
+        askQuestion()
+    }
+    
+    func showFinalDetails() {
+        showingResultsAlert = true
     }
 }
 
