@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showingWrongAlert = false
     @State private var showingResultsAlert = false
     
     @State private var score = 0
-    @State private var scoreMessage = ""
     @State private var currentQuestion = 1
     
-    private let questionsCount = 8
+    @State private var selectedFlag: Int? = nil
     
-    private var wrongDismissAction: () -> Void {
-        currentQuestion == questionsCount ? showFinalDetails : askQuestion
-    }
+    private let questionsCount = 8
         
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
 
@@ -41,6 +37,9 @@ struct ContentView: View {
                     .foregroundColor(.white)
                 VStack(spacing: 15) {
                     VStack {
+                        Text("Question \(currentQuestion) / \(questionsCount)")
+                            .font(.footnote)
+                            .padding()
                         Text("Tap on flag of")
                             .universalForegroundStyle()
                             .font(.subheadline.weight(.heavy))
@@ -58,9 +57,10 @@ struct ContentView: View {
                                 .clipShape(Capsule())
                                 .shadow(radius: 5)
                         }
+                        .rotation3DEffect(.degrees(selectedFlag == number ? 360 : 0), axis: (x: 0, y: 1, z: 0))
+                        .opacity(selectedFlag == nil ? 1 : (number == selectedFlag ? 1 : 0.25))
+                        .scaleEffect(selectedFlag == nil ? 1 : (number == selectedFlag ? 1 : 0.8))
                     }
-                    Text("Question \(currentQuestion) / \(questionsCount)")
-                        .font(.footnote)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 20)
@@ -68,40 +68,55 @@ struct ContentView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 
                 Spacer()
+                
+                if let selected = selectedFlag {
+                    let message = selected == correctAnswer ? "You are right!" : "Wrong! That's the flag of \(countries[selected])"
+                    VStack {
+                        Text(message)
+                            .foregroundColor(selectedFlag == correctAnswer ? .green : .red)
+                        
+                        if currentQuestion != questionsCount {
+                            Button("Next Question") {
+                                askQuestion()
+                            }
+                        } else {
+                            Button("Restart the game") {
+                                resetGame()
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 20)
+                    .universalBackground()
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .transition(.slide)
+                }
+                
                 Spacer()
                 
                 Text("Score: \(score)")
                     .foregroundColor(.white)
                     .font(.title.bold())
-                
-                Spacer()
             }
             .padding()
+            .preferredColorScheme(.dark)
         }
-        .universalAlert(isPresented: $showingWrongAlert, title: "Wrong", message: scoreMessage, dismissTitle: "Continue", dismissAction: wrongDismissAction)
-        
-        .universalAlert(isPresented: $showingResultsAlert, title: "Result", message: "Your score is \(score)", dismissTitle: "Reset the Game", dismissAction: resetGame)
     }
     
     func flagTapped(_ number: Int) {
-        let isCorrect = number == correctAnswer
-        
-        score += isCorrect ? 1 : 0
-        
-        if !isCorrect {
-            scoreMessage = "That's the flag of \(countries[number])"
-            
-            showingWrongAlert = true
-        } else {
-            if currentQuestion != questionsCount {
-                askQuestion()
-            } else {
-                showFinalDetails()
-            }
+        guard selectedFlag == nil else { return }
+        withAnimation {
+            selectedFlag = number
         }
+        
+        let isCorrect = number == correctAnswer
+        score += isCorrect ? 1 : 0
     }
     
     func askQuestion() {
+        withAnimation {
+            selectedFlag = nil
+        }
         currentQuestion += 1
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
